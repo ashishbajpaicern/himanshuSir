@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Visualization</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      .chart-container {
+        width: 400px;
+        margin: 20px auto;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h2>Attendance</h2>
+    <div class="chart-container">
+      <canvas id="attendanceChart"></canvas>
+    </div>
+
+    <h2>Marks in Class Tests</h2>
+    <div class="chart-container">
+      <canvas id="marksChart"></canvas>
+    </div>
+
+    <h2>Interview Numbers</h2>
+    <div class="chart-container">
+      <canvas id="interviewChart"></canvas>
+    </div>
+
+    <script>
+      // Attendance data (example)
+      const attendanceData = {
+        present: 75,
+        absent: 25,
+      };
+
+      // Marks data (example)
+      const marksData = {
+        test1: 90,
+        test2: 85,
+        test3: 95,
+      };
+
+      // Interview data (example)
+      const interviewData = {
+        passed: 40,
+        failed: 10,
+        pending: 5,
+      };
+
+      // Attendance chart
+      const attendanceCtx = document
+        .getElementById("attendanceChart")
+        .getContext("2d");
+      new Chart(attendanceCtx, {
+        type: "pie",
+        data: {
+          labels: ["Present", "Absent"],
+          datasets: [
+            {
+              data: [attendanceData.present, attendanceData.absent],
+              backgroundColor: ["#4CAF50", "#F44336"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: "Attendance Chart",
+          },
+        },
+      });
+
+      // Marks chart
+      const marksCtx = document.getElementById("marksChart").getContext("2d");
+      new Chart(marksCtx, {
+        type: "bar",
+        data: {
+          labels: Object.keys(marksData),
+          datasets: [
+            {
+              label: "Marks",
+              data: Object.values(marksData),
+              backgroundColor: "#2196F3",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: "Marks in Class Tests",
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+
+      // Interview chart
+      const interviewCtx = document
+        .getElementById("interviewChart")
+        .getContext("2d");
+      new Chart(interviewCtx, {
+        type: "doughnut",
+        data: {
+          labels: ["Passed", "Failed", "Pending"],
+          datasets: [
+            {
+              data: Object.values(interviewData),
+              backgroundColor: ["#4CAF50", "#F44336", "#FFC107"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: "Interview Numbers",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
