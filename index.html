@@ -1,70 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Authentication Page</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: rgb(63, 63, 63);
-      }
-
-      .container {
-        background-color: #f3f168;
-        padding: 50px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      .form-group input[type="text"],
-      .form-group input[type="password"] {
-        width: 100%;
-        padding: 8px;
-        border-radius: 3px;
-        border: 1px solid #ccc;
-      }
-
-      .form-group input[type="submit"] {
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 3px;
-      }
-    </style>
+    <title>Login Page</title>
   </head>
   <body>
-    <div class="container">
-      <h2>Authentication</h2>
-      <form action="second.html">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Log In" />
-        </div>
-      </form>
-    </div>
+    <h2>Login</h2>
+    <form onsubmit="authenticateUser(event)">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required /><br /><br />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required /><br /><br />
+
+      <input type="submit" value="Login" />
+    </form>
+
+    <p id="error-msg"></p>
+
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
