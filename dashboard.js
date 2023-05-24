@@ -10,7 +10,7 @@ usernameElement.textContent = "Welcome, " + username + "!";
 // Read the attendance Excel file using the xlsx library
 var attendanceFile = "attendance.xlsx";
 var attendanceWorkbook = XLSX.readFile(attendanceFile);
-var attendanceSheet = attendanceWorkbook.Sheets["Sheet1"]; // Assuming the attendance data is on "Sheet1"
+var attendanceSheet = attendanceWorkbook.Sheets["Sheet_number"]; // Assuming the attendance data is on "Sheet1"
 
 // Convert Excel data to JSON
 var attendanceData = XLSX.utils.sheet_to_json(attendanceSheet);
