@@ -6,36 +6,29 @@ const username = urlParams.get('username');
 const usernameElement = document.getElementById('username');
 usernameElement.textContent = `Welcome, ${username}!`;
 
-
-// Redirect to the mock interview page with the username
-const mockInterviewUrl = 'mock-interview.html?username=' + encodeURIComponent(username);
-const mockInterviewLink = document.getElementById('mock-interview-link');
-mockInterviewLink.href = mockInterviewUrl;
-
-
-// Load the detail data
-fetch('detail.xlsx')
+// Load the mock interview data
+fetch('mockinterview.xlsx')
   .then(response => response.arrayBuffer())
   .then(data => {
     const workbook = XLSX.read(data, { type: 'array' });
     const sheetName = workbook.SheetNames[0]; // Assuming the data is in the first sheet
-    const detailSheet = workbook.Sheets[sheetName];
+    const mockInterviewSheet = workbook.Sheets[sheetName];
 
     // Convert Excel data to JSON
-    const detailData = XLSX.utils.sheet_to_json(detailSheet, { header: 1 });
+    const mockInterviewData = XLSX.utils.sheet_to_json(mockInterviewSheet, { header: 1 });
 
     // Find the column indexes for A to M (0-based index)
-    const columnIndexes = getColumnIndexes(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']);
+    const columnIndexes = getColumnIndexes([ 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']);
 
-    // Find the row with the username as the second column value (row index starts from 1 since 0 is the header)
-    const userData = detailData.find(row => row[columnIndexes[1]] === username);
+    // Find the row with the username as the first column value
+    const userData = mockInterviewData.find(row => row[columnIndexes[1]] === username);
 
-    // Display the user's data in the detail-data element
-    const detailDataElement = document.getElementById('detail-data');
-    detailDataElement.innerHTML = '';
+    // Display the user's data in the mock-interview-data element
+    const mockInterviewDataElement = document.getElementById('mock-interview-data'); // Updated ID
+    mockInterviewDataElement.innerHTML = '';
 
     if (userData) {
-      const headingRow = detailData[0];
+      const headingRow = mockInterviewData[0];
       const userDataRow = userData;
 
       // Create a table to display the data
@@ -67,13 +60,13 @@ fetch('detail.xlsx')
       tbody.appendChild(userDataRowElement);
       table.appendChild(tbody);
 
-      detailDataElement.appendChild(table);
+      mockInterviewDataElement.appendChild(table);
     } else {
-      detailDataElement.textContent = 'No data available for the user.';
+      mockInterviewDataElement.textContent = 'No data available for the user.';
     }
   })
   .catch(error => {
-    console.error('Error reading detail file:', error);
+    console.error('Error reading mock interview file:', error);
     showError('An error occurred while loading data.');
   });
 
@@ -89,5 +82,9 @@ function getColumnIndexes(columns) {
 
 function showError(message) {
   const errorMsg = document.getElementById('error-msg');
-  errorMsg.textContent = message;
+  if (errorMsg) {
+    errorMsg.textContent = message;
+  } else {
+    console.error(message);
+  }
 }

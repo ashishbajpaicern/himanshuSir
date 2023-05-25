@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login Page</title>
+    <title>Admin Login</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -58,39 +58,23 @@
         text-align: center;
         margin-top: 20px;
       }
-
-      .admin-link {
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      .admin-link a {
-        color: #000000;
-        text-decoration: none;
-      }
-
-      .admin-link a:hover {
-        text-decoration: underline;
-      }
     </style>
   </head>
   <body>
-    <h2>Login</h2>
-    <form onsubmit="authenticateUser(event)">
+    <h2>Admin Login</h2>
+    <form onsubmit="authenticateAdmin(event)">
       <label for="username">Username:</label>
-      <input type="text" id="username" required /><br /><br />
+      <input type="text" id="admin-username" required /><br /><br />
 
       <label for="password">Password:</label>
-      <input type="password" id="password" required /><br /><br />
+      <input type="password" id="admin-password" required /><br /><br />
 
       <input type="submit" value="Login" />
     </form>
 
     <p id="error-msg"></p>
 
-    <p class="admin-link"><a href="adminLogin.html">Admin Login</a></p>
-
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-    <script src="script.js"></script>
+    <script src="adminScript.js"></script>
   </body>
 </html>
